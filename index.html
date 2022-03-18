@@ -169,16 +169,21 @@
 			// opens new window
 			let win = window.open("", "Results", "width=600, height=500");
 
-			// print timing
+			// print hours in American time
 			console.log("expectedTime: " + expectedTime);
 			if (expectedTime.getHours() > 12) {
 				win.document.write("Your order will be ready at: " + (parseInt(expectedTime.getHours()) - 12));
 			} else {
 				win.document.write("Your order will be ready at: " + expectedTime.getHours());
 			}
-			win.document.write("Your order will be ready at: " + expectedTime.getHours() +
-			":" + expectedTime.getMinutes() + "<br />");
 
+			// print minutes in proper minute form
+			if (expectedTime.getMinutes() < 10) {
+				win.document.write(":0" + expectedTime.getMinutes() + "<br />");
+			} else {
+				win.document.write(":" + expectedTime.getMinutes() + "<br />");
+			}
+			
 			// print item information to new window
 			for (let i = 0; i < 5; i++) {
 				if (parseInt($("select[name=quan" + i + "]")[0].value) != 0) {
